@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use descomentado en v180 para habilitar la verificacion de email para un usuario que se registra desde el form de registro (por default estaba comentado)
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+// encabezado de la clase por default, comentado en v180
+// class User extends Authenticatable
+
+// modificacion del encabezado de la clase en el v180 para habilitar la verificacion de email para un usuario que se registra desde el form de registro
+class User extends Authenticatable implements MustVerifyEmail 
 {
     use HasApiTokens, HasFactory, Notifiable;
 
