@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use descomentado en v180 para habilitar la verificacion de email para un usuario que se registra desde el form de registro (por default estaba comentado)
+// path de esta inteerface -> vendor\laravel\framework\src\Illuminate\Contracts\Auth\MustVerifyEmail.php
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
