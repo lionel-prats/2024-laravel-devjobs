@@ -24,8 +24,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /* 
+        
         // implementacion para personalizar el email de verificacion de cuenta en v182
+        /*
         VerifyEmail::toMailUsing(function($notifiable, $url) {
             return (new MailMessage)
                 ->subject("Verificar Cuenta")
@@ -33,6 +34,6 @@ class AuthServiceProvider extends ServiceProvider
                 ->action("Confirmar Cuenta", $url)
                 ->line("Si no creaste esta cuenta puedes ignorar este mensaje.");
         });    
-        */     
+        */
     }
 }

@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Es necesario confirmar tu cuenta antes de continuar. Revisa tu email y presiona sobre el enlace e confirmación.') }}
+        {{ __('Es necesario confirmar tu cuenta antes de continuar. Revisa tu email y presiona sobre el enlace de confirmación.') }}
     </div>
 
     @if (session('status') == 'verification-link-sent')
