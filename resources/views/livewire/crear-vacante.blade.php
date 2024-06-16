@@ -24,9 +24,22 @@
             name="salario" 
             id="salario"
         >
-            <option value="">-- Selecciona un rol --</option>
-            <option value="1" {{old('rol') == "1" ? "selected" : ""}}>Developer - Obtener Empleo</option>
-            <option value="2" {{old("rol") == "2" ? "selected" : ""}}>Recruiter - Publicar Empleo</option>
+            <option>-- Seleccione --</option>
+            @foreach ($salarios as $salario)
+                <option 
+                    {{old('salario') == $salario->id ? "selected" : ""}}
+                    value="{{$salario->id}}" 
+                >{{$salario->salario}}</option>
+            @endforeach
+            {{--
+            CASO DE USO CON $salarios = Salario::pluck(...) en vez de $salarios = Salario::all(...) (ver notas v191)
+            @foreach ($salarios as $id => $salario)
+                <option 
+                    {{old('salario') == $id ? "selected" : ""}}
+                    value="{{$id}}" 
+                >{{$salario}}</option>
+            @endforeach 
+            --}}
         </select>
         <x-input-error :messages="$errors->get('salario')" class="mt-2" />
     </div>
@@ -38,9 +51,13 @@
             name="categoria" 
             id="categoria"
         >
-            <option value="">-- Selecciona un rol --</option>
-            <option value="1" {{old('rol') == "1" ? "selected" : ""}}>Developer - Obtener Empleo</option>
-            <option value="2" {{old("rol") == "2" ? "selected" : ""}}>Recruiter - Publicar Empleo</option>
+            <option>-- Seleccione --</option>
+            @foreach ($categorias as $categoria)
+                <option 
+                    {{old('categoria') == $categoria->id ? "selected" : ""}}
+                    value="{{$categoria->id}}" 
+                >{{$categoria->categoria}}</option>
+            @endforeach
         </select>
         <x-input-error :messages="$errors->get('categoria')" class="mt-2" />
     </div>
