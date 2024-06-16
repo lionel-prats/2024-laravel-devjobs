@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacanteController;
 
@@ -15,6 +16,8 @@ use App\Http\Controllers\VacanteController;
 |
 */
 
+Route::get('/pruebas', PruebaController::class)->middleware(['auth', 'verified'])->name('pruebas.index');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,7 +27,7 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/dashboard', [VacanteController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [VacanteController::class, 'index'])->middleware(['auth', 'verified'])->name('vacantes.index');
 
 // Route::resource("vacantes", VacanteController::class);
 
