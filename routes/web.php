@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VacanteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// recurso creado por breeze (v173)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// recurso creado por breeze (v173) (reemplazado por el de abajo en el v185)
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [VacanteController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::resource("vacantes", VacanteController::class);
 
 // recurso creado por breeze (v173)
 Route::middleware('auth')->group(function () {
