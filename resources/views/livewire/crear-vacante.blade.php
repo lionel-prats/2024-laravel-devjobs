@@ -1,6 +1,7 @@
 
 <form 
     class="md:w-1/2 space-y-5" 
+    wire:submit.prevent="crearVacante"
 >
     <!-- Titulo Vacante -->
     <div>
@@ -9,25 +10,26 @@
             class="block mt-1 w-full" 
             id="titulo" 
             type="text" 
-            name="titulo" 
-            :value="old('titulo')" 
+            wire:model="titulo" 
             autocomplete="off" 
             placeholder="Título Vacante"
         />
-        <x-input-error :messages="$errors->get('titulo')" class="mt-2" />
+        {{-- <x-input-error :messages="$errors->get('titulo')" class="mt-2" /> --}}
+        @error('titulo')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <!-- Salario -->
     <div>
         <x-input-label for="salario" :value="__('Salario Mensual')" />
         <select 
             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"
-            name="salario" 
+            wire:model="salario" 
             id="salario"
         >
             <option>-- Seleccione --</option>
             @foreach ($salarios as $salario)
                 <option 
-                    {{old('salario') == $salario->id ? "selected" : ""}}
                     value="{{$salario->id}}" 
                 >{{$salario->salario}}</option>
             @endforeach
@@ -41,25 +43,30 @@
             @endforeach 
             --}}
         </select>
-        <x-input-error :messages="$errors->get('salario')" class="mt-2" />
+        {{-- <x-input-error :messages="$errors->get('salario')" class="mt-2" /> --}}
+        @error('salario')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <!-- Categoría -->
     <div>
         <x-input-label for="categoria" :value="__('Categoría')" />
         <select 
             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"
-            name="categoria" 
+            wire:model="categoria" 
             id="categoria"
         >
             <option>-- Seleccione --</option>
             @foreach ($categorias as $categoria)
                 <option 
-                    {{old('categoria') == $categoria->id ? "selected" : ""}}
                     value="{{$categoria->id}}" 
                 >{{$categoria->categoria}}</option>
             @endforeach
         </select>
-        <x-input-error :messages="$errors->get('categoria')" class="mt-2" />
+        {{-- <x-input-error :messages="$errors->get('categoria')" class="mt-2" /> --}}
+        @error('categoria')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <!-- Empresa -->
     <div>
@@ -68,12 +75,14 @@
             class="block mt-1 w-full" 
             id="empresa" 
             type="text" 
-            name="empresa" 
-            :value="old('empresa')" 
+            wire:model="empresa" 
             autocomplete="off" 
             placeholder="Empresa: ej. Netflix, Uber, Shopify"
         />
-        <x-input-error :messages="$errors->get('empresa')" class="mt-2" />
+        {{-- <x-input-error :messages="$errors->get('empresa')" class="mt-2" /> --}}
+        @error('empresa')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <!-- Fecha límite postulación -->
     <div>
@@ -82,11 +91,13 @@
             class="block mt-1 w-full" 
             id="ultimo_dia" 
             type="date" 
-            name="ultimo_dia" 
-            :value="old('ultimo_dia')" 
+            wire:model="ultimo_dia" 
             autocomplete="off" 
         />
-        <x-input-error :messages="$errors->get('ultimo_dia')" class="mt-2" />
+        {{-- <x-input-error :messages="$errors->get('ultimo_dia')" class="mt-2" /> --}}
+        @error('ultimo_dia')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <!-- Descripción del trabajo -->
     <div>
@@ -94,10 +105,13 @@
         <textarea 
             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full h-72"
             id="descripcion"
-            name="descripcion"
+            wire:model="descripcion"
             placeholder="Descripción general del puesto, experiencia"
-        >{{ old('descripcion') }}</textarea>
-        <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
+        ></textarea>
+        {{-- <x-input-error :messages="$errors->get('descripcion')" class="mt-2" /> --}}
+        @error('descripcion')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <!-- Imagen -->
     <div>
@@ -106,8 +120,12 @@
             class="block mt-1 w-full" 
             id="imagen" 
             type="file" 
-            name="imagen"  
+            wire:model="imagen"
+            accept="image/*" {{-- atributo html para restringir la carga de archivos a imagenes --}} 
         />
+        @error('imagen')
+            <livewire:mostrar-alerta :message="$message" />
+        @enderror 
     </div>
     <x-primary-button>
         Crear Vacante
