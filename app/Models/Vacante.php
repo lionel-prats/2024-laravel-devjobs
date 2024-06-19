@@ -20,4 +20,10 @@ class Vacante extends Model
         'publicado', 
         'user_id'
     ];
+
+    // atributo donde podemos aclararle a Laravel con que formato queremos que procese los datos de los campos de la tabla
+    // implementamos esto en el v206 para el campo ultimo_dia, ya que pese a ser DATE en la DB, Laravel lo toma como un string, y casteandolo a datetime podemos, por ejemplo, formatearlo como fecha (v206)
+    protected $casts = [
+        'ultimo_dia' => 'datetime',
+    ];
 }
