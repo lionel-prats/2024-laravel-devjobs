@@ -7,6 +7,7 @@ use App\Models\Vacante;
 use Livewire\Component;
 use App\Models\Categoria;
 use Livewire\WithFileUploads; // trait de Livewire (v197)
+use Illuminate\Support\Facades\Storage; // clase para poder eliminar archivos de storage (v215)
 
 class CrearVacante extends Component
 {
@@ -23,7 +24,7 @@ class CrearVacante extends Component
     public $descripcion;
     public $imagen;
     
-    // reglas de validacion del formulario
+    // LiveWire hace uso de las reglas de validacion de este atributo que tiene que llamarse $rules, para la validacion del formulario
     protected $rules = [
         'titulo' => 'required|string',
         'salario' => 'required',
@@ -54,11 +55,19 @@ class CrearVacante extends Component
         */
 
         // bloque para Almacenar la imagen y obtener el nombre para el INSERT /////////////
-        $relative_path_imagen_subida = $this->imagen->store("public/vacantes"); 
+        $relative_path_imagen_subida = $this->imagen->store("public/vacantes");
+        // ver notas v202
+        // full path de la imagen almacenada vvv 
+        // "storage/public/vacantes/LFBTUWpxvI4BI4bJic1IVgEElCmSssDizVO3e7GF.jpg"
+        // return almacenado en $relative_path_imagen_subida vvv
         // "public/vacantes/LFBTUWpxvI4BI4bJic1IVgEElCmSssDizVO3e7GF.jpg"
         $datos["imagen"] = str_replace("public/vacantes/", "", $relative_path_imagen_subida);
         // "LFBTUWpxvI4BI4bJic1IVgEElCmSssDizVO3e7GF.jpg";
         // fin bloque /////////////////////////////////////////////////////////////////////
+
+        // mantengo vacía la carpeta storage\app\livewire-tmp (implementacion propia)
+        $files = Storage::allFiles("livewire-tmp");
+        Storage::delete($files);
 
         // Bolque para el INSERT de la publicacion en vacantes
         Vacante::create([

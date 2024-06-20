@@ -111,23 +111,24 @@
             class="block mt-1 w-full" 
             id="imagen" 
             type="file" 
-            wire:model="imagen"
+            wire:model="imagen_nueva"
             accept="image/*" {{-- atributo html para restringir la carga de archivos a imagenes --}} 
         />
-        <div class="my-5 w-80">
-            <x-input-label :value="__('Imagen actual')" />
-            <img src="{{asset("storage/vacantes/$imagen")}}" alt="{{"Imagen Vacante $titulo"}}">
-        </div> 
-        {{-- 
-        <div class="my-5 w-80">
-            @if ($imagen)
-                Imagen:
-                <img src="{{$imagen->temporaryUrl()}}">
-            @endif
-        </div> 
-        --}}
+        <div class="flex gap-3">
+            <div class="my-5 w-80">
+                <x-input-label :value="__('Imagen actual')" />
+                <img src="{{asset("storage/vacantes/$imagen")}}" alt="{{"Imagen Vacante $titulo"}}">
+            </div> 
+            
+            <div class="my-5 w-80">
+                @if ($imagen_nueva)
+                    <x-input-label :value="__('Imagen nueva')" />
+                    <img src="{{$imagen_nueva->temporaryUrl()}}">
+                @endif
+            </div> 
+        </div>
 
-        @error('imagen')
+        @error('imagen_nueva')
             <livewire:mostrar-alerta :message="$message" />
         @enderror 
     </div>
