@@ -44,6 +44,10 @@ class VacanteController extends Controller
      */
     public function edit(Vacante $vacante)
     {
+        // ejecucion de VacantePolicy->update()
+        // este policy retorna true si pasa la validacion y en caso contrario detiene la ejecucion de este controlador retornando un error 403
+        $this->authorize("update", $vacante); 
+
         return view('vacantes.edit', [
             "vacante" => $vacante
         ]);
