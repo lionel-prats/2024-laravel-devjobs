@@ -12,6 +12,7 @@ class MostrarVacantes extends Component
 
     public function eliminarVacante(Vacante $vacante) 
     {
+        // elimino la imagen de la vacante de storage\app\public\vacantes y finalmente elimino el registro de la tabla vacantes (v219)
         if(Storage::delete("public/vacantes/$vacante->imagen")){
             $vacante->delete();
         }

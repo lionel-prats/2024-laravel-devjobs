@@ -26,4 +26,18 @@ class Vacante extends Model
     protected $casts = [
         'ultimo_dia' => 'datetime',
     ];
+
+    // relacion de muchos a uno con Categoria (v222)
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
+
+    // relacion de muchos a uno con Salario (v222)
+    public function salario()
+    {
+        return $this->belongsTo(Salario::class);
+    }
+
+
 }

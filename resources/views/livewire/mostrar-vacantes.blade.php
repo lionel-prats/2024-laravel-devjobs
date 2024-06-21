@@ -5,7 +5,7 @@
                 <div class="space-y-3">
                     <a 
                         class="text-xl font-bold"
-                        href="#"
+                        href="{{route("vacantes.show", $vacante)}}"
                     >{{$vacante->titulo}}</a>
                     <p class="text-sm text-gray-600 font-bold">{{$vacante->empresa}}</p>
                     <p class="text-sm text-gray-500">Último día: {{$vacante->ultimo_dia->format('d/m/Y')}}</p>
@@ -50,9 +50,10 @@
                 })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        // Livewire.dispatch("eliminarVacante", vacante);
+                        // ejecuto el metodo MostrarVacantes->eliminarVacante()
+                        Livewire.dispatch("eliminarVacante", vacante);
                         // Livewire.dispatch("eliminarVacante", {vacante});
-                        Livewire.dispatch("eliminarVacante", [vacante]);
+                        // Livewire.dispatch("eliminarVacante", [vacante]);
                         Swal.fire({
                             title: "Se eliminó la Vacante",
                             text: "Eliminado Correctamente",

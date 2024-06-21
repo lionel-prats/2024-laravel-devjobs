@@ -34,6 +34,7 @@
                 {{ $slot }}
             </main>
         </div>
+        
         @livewireScripts {{-- scripts de LiveWire v188 --}}
 
         {{-- espacio reservado para agegar archivos .js no de manera global --}}
