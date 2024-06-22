@@ -3,6 +3,7 @@
 namespace App\Livewire;
 // use App\Models\Candidato;
 use App\Models\Vacante;
+use App\Notifications\NuevoCandidato;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage; // clase para poder eliminar archivos de storage
 use Livewire\WithFileUploads; // trait de Livewire para la carga de archivos en el server
@@ -12,6 +13,7 @@ class PostularVacante extends Component
     // importación de trait de Livewire dentro de la clase para poder enviar archivos al servidor 
     use WithFileUploads;
     
+    // en este atributo, en el metodo mount(), cargaremos la instancia de una Vacante
     public $vacante; 
 
     // atributo conectado al input wire:model="cv" del template (v231) 
@@ -45,7 +47,16 @@ class PostularVacante extends Component
             'cv'         => $datos["cv"]
         ]);
         
-        // crear notificacion y enviar email
+        // bloque para crear notificacion y enviar email
+        // $this->vacante->reclutador() es instancia del reclutador que creó la vacante (v237)
+        // notify(new NuevoCandidato(...)) es el metodo que va a notificar al reclutador (v237)
+        // el argumento que le pasamos a notufy() es una nueva instancia de app\Notifications\NuevoCandidato.php (v237)
+        // a new NuevoCandidato(...) le pasamos los argumentos requeridos para su instanciacion
+        $this->vacante->reclutador->notify(new NuevoCandidato(
+            $this->vacante->id,
+            $this->vacante->titulo,
+            auth()->user()->id
+        ));
 
         // mostrar al usuario un mensaje de ok
         session()->flash("mensaje", "Se envió correctamente tu información, mucha suerte");

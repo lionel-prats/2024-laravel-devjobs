@@ -31,6 +31,16 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @auth
+
+                    {{-- enlace a notificaciones (solo para recruiters) vista escritorio (v241) --}}
+                    @if (auth()->user()->rol === 2)
+                        <a 
+                            class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex justify-center items-center text-sm font-extrabold text-white"
+                            href="{{route("notificaciones")}}"
+                        >{{auth()->user()->unreadNotifications->count()}} 
+                        </a>
+                    @endif
+
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -90,8 +100,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         @auth
-            @if (Auth::user()->rol === 2)
-                
+            {{-- @if (Auth::user()->rol === 2) --}}
+            @if (auth()->user()->rol === 2)
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('pruebas')" :active="request()->routeIs('pruebas')">
                         {{ __('Pruebas') }}
@@ -102,6 +112,18 @@
                     <x-responsive-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
                         {{ __('Crear Vacante') }}
                     </x-responsive-nav-link>
+
+                    {{-- enlace a notificaciones (solo para recruiters) vista mobile (v242) --}}
+                    <a 
+                        class="flex flex-row gap-2 items-center p-3 text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 cursor-pointer"
+                        href="{{route("notificaciones")}}">
+                        <span 
+                            class="w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex justify-center items-center text-sm font-extrabold text-white "
+                        >{{auth()->user()->unreadNotifications->count()}} 
+                        </span>
+                        <p>@choice("Notificación|Notificaciones", auth()->user()->unreadNotifications->count())</p>
+                    </a>
+                    
                 </div>
             @endif
 

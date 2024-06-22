@@ -36,7 +36,7 @@ class VacanteController extends Controller
      */
     public function show(Vacante $vacante)
     {
-        if($vacante->candidatos()->where('user_id', auth()->user()->id)->count() > 0) {
+        if(auth()->user() && $vacante->candidatos()->where('user_id', auth()->user()->id)->count() > 0) {
             session()->flash('mensaje', 'Ya te has postulado a esta vacante.');
         } else {
             session()->forget('mensaje');
