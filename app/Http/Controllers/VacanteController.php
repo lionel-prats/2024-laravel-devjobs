@@ -12,6 +12,10 @@ class VacanteController extends Controller
      */
     public function index()
     {
+        // VacantePolicy->viewAny() (v226)
+        // Este policy solo permite acceder a http://devjobs.test/dashboard a recruiters (v226)
+        $this->authorize("viewAny", Vacante::class); 
+
         return view('vacantes.index');
     }
 
@@ -20,6 +24,10 @@ class VacanteController extends Controller
      */
     public function create()
     {
+        // VacantePolicy->create() (v227)
+        // Este policy solo permite acceder a http://devjobs.test/vacantes/create a recruiters (v227)
+        $this->authorize("create", Vacante::class); 
+        
         return view('vacantes.create');
     }
 

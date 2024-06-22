@@ -10,10 +10,12 @@ class VacantePolicy
 {
     /**
      * Determine whether the user can view any models.
+     * 
+     * Policy implementado en VacanteController->index() (v226)
      */
     public function viewAny(User $user)/* : bool */
     {
-        //
+        return $user->rol === 2;
     }
 
     /**
@@ -26,10 +28,12 @@ class VacantePolicy
 
     /**
      * Determine whether the user can create models.
+     * 
+     * Policy implementado en VacanteController->create() (v227)
      */
     public function create(User $user)/* : bool */
     {
-        //
+        return $user->rol === 2;
     }
 
     /**
