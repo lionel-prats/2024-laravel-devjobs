@@ -39,5 +39,10 @@ class Vacante extends Model
         return $this->belongsTo(Salario::class);
     }
 
+    // relacion de una a muchos con Candidato (v233)
+    public function candidatos()
+    {
+        return $this->hasMany(Candidato::class);
+    }
 
 }
