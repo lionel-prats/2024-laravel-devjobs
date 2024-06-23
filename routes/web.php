@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacanteController;
@@ -20,9 +21,7 @@ use App\Http\Controllers\NotificacionController;
 
 Route::get('/pruebas', PruebaController::class)->middleware(['auth', 'verified'])->name('pruebas');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name("home");
+Route::get('/', HomeController::class)->name("home"); // v247
 
 // recurso creado por breeze (v173) (reemplazado por el de abajo en el v185)
 // Route::get('/dashboard', function () {

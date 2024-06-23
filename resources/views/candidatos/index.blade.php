@@ -15,8 +15,8 @@
                     <div class="md:flex md:justify-center p-5">
                         <ul class="divide-y divide-gray-200 w-full">
                             @forelse ($vacante->candidatos as $candidato)
-                                <li class="p-3 flex items-center">
-                                    <div class="flex-1">
+                                <li class="p-3 sm:flex sm:items-center">
+                                    <div class="flex-1 mb-5 sm:mb-0">
                                         <p class="text-xl font-medium text-gray-800">
                                             {{$candidato->user->name}}
                                         </p>
@@ -45,10 +45,6 @@
                         </ul>
 
                     </div>
-                        
-                    {{-- <div class="md:flex md:justify-center p-5">
-                        <livewire:crear-vacante />
-                    </div> --}}
                 </div>
             </div>
         </div>
