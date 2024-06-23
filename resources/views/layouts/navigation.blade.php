@@ -11,7 +11,8 @@
                 </div>
 
                 @auth
-                    @if (Auth::user()->rol === 2)
+                    {{-- @if (Auth::user()->rol === 2) --}}
+                    @can('create', App\Models\Vacante::class) {{-- v244 --}}
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-nav-link :href="route('pruebas')" :active="request()->routeIs('pruebas')">
@@ -24,7 +25,7 @@
                                 {{ __('Crear Vacante') }}
                             </x-nav-link>
                         </div>
-                    @endif
+                    @endcan
                 @endauth
             </div>
 
@@ -33,13 +34,25 @@
                 @auth
 
                     {{-- enlace a notificaciones (solo para recruiters) vista escritorio (v241) --}}
+                    {{-- 
                     @if (auth()->user()->rol === 2)
                         <a 
                             class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex justify-center items-center text-sm font-extrabold text-white"
                             href="{{route("notificaciones")}}"
                         >{{auth()->user()->unreadNotifications->count()}} 
                         </a>
-                    @endif
+                    @endif 
+                    --}}
+                    
+                    
+                    {{-- ACTUALIZACION validacion para mostrar enlace a notificaciones (solo para recruiters) vista escritorio (v244) --}}
+                    @can('create', App\Models\Vacante::class)
+                        <a 
+                            class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex justify-center items-center text-sm font-extrabold text-white"
+                            href="{{route("notificaciones")}}"
+                        >{{auth()->user()->unreadNotifications->count()}} 
+                        </a>
+                    @endcan
 
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">

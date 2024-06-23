@@ -21,7 +21,7 @@ Route::get('/pruebas', PruebaController::class)->middleware(['auth', 'verified']
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("home");
 
 // recurso creado por breeze (v173) (reemplazado por el de abajo en el v185)
 // Route::get('/dashboard', function () {
@@ -29,7 +29,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', [VacanteController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'rol.reclutador'])
     ->name('vacantes.index');
 Route::get('/vacantes/create', [VacanteController::class, 'create'])
     ->middleware(['auth', 'verified'])
@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/notificaciones', NotificacionController::class)->name("notificaciones"); // v238
+Route::get('/notificaciones', NotificacionController::class)
+    ->middleware(['auth', 'verified', 'rol.reclutador']) // v243
+    ->name("notificaciones"); // v238
 
 require __DIR__.'/auth.php';
