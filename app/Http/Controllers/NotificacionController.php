@@ -31,7 +31,7 @@ class NotificacionController extends Controller
             $exec_query = $db->query($query); 
         }
         */ 
-        // auth()->user()->unreadNotifications->markAsRead();
+        auth()->user()->unreadNotifications->markAsRead();
 
         return view("notificaciones.index", [
             "notificaciones" => $notificaciones
