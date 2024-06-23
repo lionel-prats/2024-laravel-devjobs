@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\NotificacionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacanteController;
+use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\NotificacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::get('/vacantes/{vacante}/edit', [VacanteController::class, 'edit'])
     ->name('vacantes.edit');
 Route::get('/vacantes/{vacante}', [VacanteController::class, 'show'])
     ->name('vacantes.show');
+Route::get('/candidatos/{vacante}', [CandidatoController::class, 'index'])
+    ->name('candidatos.index');
 
 // Route::resource("vacantes", VacanteController::class);
 

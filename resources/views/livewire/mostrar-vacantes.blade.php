@@ -13,8 +13,11 @@
                 <div class="flex gap-3 flex-col items-stretch sm:flex-row mt-5 md:mt-0 ">
                     <a 
                         class="bg-slate-800 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase text-center"
-                        href="#"
-                    >Candidatos</a>
+                        href="{{route("candidatos.index", $vacante)}}"
+                    >
+                        {{$vacante->candidatos->count()}} 
+                        @choice("Candidato|Candidatos", $vacante->candidatos->count())
+                    </a>
                     <a 
                         class="bg-blue-800 py-2 px-4 rounded-lg text-white text-xs font-bold uppercase text-center"
                         href="{{route("vacantes.edit", $vacante->id)}}"
